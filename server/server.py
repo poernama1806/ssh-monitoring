@@ -22,5 +22,5 @@ class SSHMon(Resource):
 api.add_resource(SSHMon, "/<string:host>")
 
 if __name__ == "__main__":
-    app.run(debug=True)
-    #app.run(host="172.26.10.171")
+    #app.run(debug=True)
+    app.run(host="0.0.0.0")
