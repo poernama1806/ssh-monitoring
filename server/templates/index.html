@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metrics for ssh log-in attempts</title>
+</head>
+<body>
+    <h1>Metrics for ssh log-in attempts</h1>
+    <p>
+        hostname : <span id="hostname"></span><br />
+        attempt : <span id="attempt"></span><br />
+        hostname : <span id="hostname"></span><br />
+        attempt : <span id="attempt"></span>
+    </p>
+
+    <script>
+        
+        const api_url = 'http://172.26.10.171:5000/host/hp-poc-vpn-2397'
+        async function getHost() {
+            const response = await fetch(api_url);
+            const data = await response.json();
+            const {hostname, attempt} = data;
+            document.getElementById('hostname').textContent = hostname;
+            document.getElementById('attempt').textContent = attempt;
+            
+        }
+        setInterval(() => {
+             getHost();
+        }, 2000);
+       
+
+    </script>
+        
+</body>
+</html>
