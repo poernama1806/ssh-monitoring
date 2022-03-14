@@ -22,14 +22,13 @@ class SSH_attempt(Resource):
         args=ssh_mon_args.parse_args()
         ssh_mon[host]=args
         return ssh_mon[host], 201
-
-class Host_List(Resource):
     def get(self,host):
         return ssh_mon[host]
-    def get(self):
-        return ssh_mon
+# class Host_List(Resource):
+#     def get(self):
+#         return ssh_mon
 api.add_resource(SSH_attempt, "/host/<string:host>")
-api.add_resource(Host_List, "/get-host")
+#api.add_resource(Host_List, "/get-host")
 
 @app.route('/')
 def index():
