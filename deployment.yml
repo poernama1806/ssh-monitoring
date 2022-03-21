@@ -1,0 +1,46 @@
+---
+- name: Install all requirement
+  gather_facts: yes
+  hosts: all
+
+  tasks:
+  - name: test connection
+    ping:
+  - name: install Python 3.6.9 and git
+    become: true
+    apt:
+      name:
+        - python3-pip
+        - git
+      state: present
+  - git:
+      repo: https://github.com/poernama1806/ssh-monitoring.git
+      clone: yes
+      dest: /home/herry.purnama/ssh-monitoring
+- name: Install all requirement
+  gather_facts: yes
+  hosts: server
+  tasks:
+  - pip:
+      name:
+        - Flask==2.0.3
+        - Flask-SocketIO==5.1.1
+        - requests==2.18.4
+      executable: pip3 
+  - name: change dir and execute the script
+    shell: python3 app.py
+    args:
+      chdir: /ssh-monitoring/server
+- name: Install all requirement
+  gather_facts: yes
+  hosts: client
+  tasks:
+  - pip:
+      name:
+        - watchdog==2.1.6
+        - requests==2.18.4
+      executable: pip3 
+  - name: change dir and execute the script
+    shell: python3 app.py
+    args:
+      chdir: /ssh-monitoring/client

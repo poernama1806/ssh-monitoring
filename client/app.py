@@ -5,7 +5,7 @@ from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
 # The Monitoring server
-SERVER = "http://172.26.10.171:5000/"
+SERVER = "http://172.26.10.70:5000/"
 
 # Get the hostname
 hostname = socket.gethostname()
