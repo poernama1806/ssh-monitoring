@@ -4,15 +4,7 @@ Prerequisite :
 - The server and client is using Ubuntu 18 (and above)
 - Python 3.6x (and above) installed
 - The server and client accesible by the ansible server
-- After clone the repository, update the inventory file (hosts file) with the target server and client IP address :
-    [server]
-    <server IP>
-
-    [client]
-    <client IP>
-
-    [all:vars]
-    ansible_python_interpreter=/usr/bin/python3
+- After clone the repository, update the inventory file (hosts file) with the target server and client IP address
 
 Setup :
 
@@ -23,4 +15,4 @@ Setup :
 3. Run the ansible playbook with following command :
     $ ansible-playbook -i ~/hosts deployment.yml
 4. Open the webpage in the browser with the server IP as the address :
-    http://<server IP>:5000
+    http://server_IP:5000
