@@ -1,9 +1,8 @@
 [server]
-172.26.10.70
+server_IP
 
 [client]
-172.26.10.175
-172.26.10.81
+client_IP
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
