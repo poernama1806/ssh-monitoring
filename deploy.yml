@@ -1,22 +1,29 @@
 ---
 - name: Prepare the server and client
   gather_facts: yes
+  become: yes
   hosts: all
 
   tasks:
   - name: Connection test
     ping:
-  - name: install pip and git
+  - name: Make sure pip3 installed
     become: true
     apt:
       name:
         - python3-pip
-        - git
       state: present
-  - git:
-      repo: https://github.com/poernama1806/ssh-monitoring.git
-      clone: yes
-      dest: /home/herry.purnama/ssh-monitoring
+# Make sure the directory exist
+  - name: Creates directory
+    file:
+      path: /opt/monitoring
+      state: directory
+#Copy the script to the remote server.
+  - copy:
+      src: server/app.py
+      dest: /opt/monitoring/app.py
+      mode: u+x
+#Install prerequisite
 - name: Install server prerequisite
   gather_facts: yes
   hosts: server
@@ -30,7 +37,7 @@
   - name: execute the script
     shell: nohup python3 app.py &
     args:
-      chdir: ssh-monitoring/server
+      chdir: /opt/monitoring
 - name: Install client prerequisite
   gather_facts: yes
   hosts: client
@@ -40,7 +47,7 @@
         - watchdog==2.1.6
         - requests==2.18.4
       executable: pip3 
-  - name: Change dir and execute the script
+  - name: execute the script
     shell: nohup python3 app.py &
     args:
-      chdir: ssh-monitoring/client
+      chdir: /opt/monitoring
